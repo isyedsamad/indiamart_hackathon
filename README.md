@@ -1,6 +1,7 @@
 # 🏭 IndiaMART Reimagined – Smart B2B Marketplace (MVP)
 
-A lightweight, enquiry-focused B2B marketplace prototype designed to improve lead quality, response efficiency, and buyer–seller trust, inspired by gaps observed in existing platforms like IndiaMART.
+- Live Link: https://indiamart-hackathon.vercel.app/
+  A lightweight, enquiry-focused B2B marketplace prototype designed to improve lead quality, response efficiency, and buyer–seller trust, inspired by gaps observed in existing platforms like IndiaMART.
 
 This project was built as a hackathon MVP, prioritizing core marketplace mechanics over heavy infrastructure.
 

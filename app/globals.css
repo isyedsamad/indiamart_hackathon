@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-soft: #f1f5f9;
+
+  --text: #0f172a;
+  --text-muted: #64748b;
+
+  --border: #e2e8f0;
+
+  --primary: #e5530d;
+  --primary-hover: #c2410c;
+  --primary-soft: #fff1e8;
+
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #dc2626;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --bg: #0b0f14;
+  --bg-card: #111827;
+  --bg-soft: #020617;
+
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --border: #1f2937;
+
+  --primary: #f97316;
+  --primary-hover: #fb923c;
+  --primary-soft: #2a140a;
+
+  --success: #22c55e;
+  --warning: #fbbf24;
+  --danger: #ef4444;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)]
+           antialiased text-sm md:text-base;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply w-full
+           bg-[var(--bg-card)]
+           border border-[var(--border)]
+           rounded-md
+           px-3 py-2
+           outline-none
+           transition
+           focus:border-[var(--primary)]
+           focus:ring-1 focus:ring-[var(--primary)];
+  }
+
+  button {
+    @apply inline-flex items-center justify-center
+           gap-2
+           rounded-md
+           transition-all duration-200
+           disabled:opacity-50
+           disabled:cursor-not-allowed;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .section {
+    @apply max-w-7xl mx-auto px-6 py-14;
+  }
+
+  .card {
+    @apply bg-[var(--bg-card)]
+           border border-[var(--border)]
+           rounded-xl
+           px-6 py-5
+           shadow-sm;
+  }
+
+  .btn {
+    @apply px-4 py-2
+           text-sm font-medium
+           rounded-md;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2
+           text-sm font-medium
+           rounded-md
+           bg-[var(--primary)]
+           text-white
+           hover:bg-[var(--primary-hover)]
+           active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply px-4 py-2
+           text-sm font-medium
+           rounded-md
+           border border-[var(--border)]
+           text-[var(--text)]
+           hover:bg-[var(--bg-soft)];
+  }
+
+  .text-muted {
+    @apply text-[var(--text-muted)];
+  }
+
+  /* badge base utilities inlined so Tailwind doesn't need a separate `badge` utility */
+  .badge {
+    @apply inline-flex items-center
+           px-2.5 py-1
+           rounded-md
+           text-xs font-medium;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center
+           px-2.5 py-1
+           rounded-md
+           text-xs font-medium
+           bg-emerald-100 text-emerald-700;
+  }
 }
+
+/* extra utilities from your earlier file if you still need them */
+
+/* html, body {
+  overflow: hidden;
+} */
+
+@layer base {
+  * {
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+  }
+}
+
+.loading {
+  width: 60px;
+  height: 60px;
+  border: 8px solid #cccccc;
+  border-top: 8px solid var(--primary);
+  border-radius: 100%;
+  display: inline-block;
+  animation: 1.5s ease-in 0s infinite both loading;
+}
+
+@keyframes loading {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+select option {
+  background-color: var(--bg-card);
+  color: var(--text);
+}
+
+.modal-overlay {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.timetable-grid {
+  display: grid;
+  grid-template-columns: 70px repeat(var(--days-count), minmax(140px, 1fr));
+}
+
+/* Poppins font helper classes (unchanged) */
+.poppins-thin { font-family: "Poppins", sans-serif; font-weight: 100; font-style: normal; }
+.poppins-extralight { font-family: "Poppins", sans-serif; font-weight: 200; font-style: normal; }
+.poppins-light { font-family: "Poppins", sans-serif; font-weight: 300; font-style: normal; }
+.poppins-regular { font-family: "Poppins", sans-serif; font-weight: 400; font-style: normal; }
+.poppins-medium { font-family: "Poppins", sans-serif; font-weight: 500; font-style: normal; }
+.poppins-semibold { font-family: "Poppins", sans-serif; font-weight: 600; font-style: normal; }
+.poppins-bold { font-family: "Poppins", sans-serif; font-weight: 700; font-style: normal; }
+.poppins-extrabold { font-family: "Poppins", sans-serif; font-weight: 800; font-style: normal; }
+.poppins-black { font-family: "Poppins", sans-serif; font-weight: 900; font-style: normal; }
+
+.poppins-thin-italic { font-family: "Poppins", sans-serif; font-weight: 100; font-style: italic; }
+.poppins-extralight-italic { font-family: "Poppins", sans-serif; font-weight: 200; font-style: italic; }
+.poppins-light-italic { font-family: "Poppins", sans-serif; font-weight: 300; font-style: italic; }
+.poppins-regular-italic { font-family: "Poppins", sans-serif; font-weight: 400; font-style: italic; }
+.poppins-medium-italic { font-family: "Poppins", sans-serif; font-weight: 500; font-style: italic; }
+.poppins-semibold-italic { font-family: "Poppins", sans-serif; font-weight: 600; font-style: italic; }
+.poppins-bold-italic { font-family: "Poppins", sans-serif; font-weight: 700; font-style: italic; }
+.poppins-extrabold-italic { font-family: "Poppins", sans-serif; font-weight: 800; font-style: italic; }
+.poppins-black-italic { font-family: "Poppins", sans-serif; font-weight: 900; font-style: italic; }

@@ -35,6 +35,9 @@ export default function Header() {
             Login
           </button>
           </Link>
+          <a href="https://hop2hop.lovable.app/auth" target="_blank" rel="noopener noreferrer" className="btn-outline hidden sm:inline-flex">
+            SignUp
+          </a>
           <button className="btn-primary inline-flex gap-1">
             <Plus size={16} />
             Post Requirement
